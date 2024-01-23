@@ -1,0 +1,76 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+
+    {% load static %}
+
+
+<div class='grid grid-cols-5 gap-6'>
+    <div class='col-span-3'>
+        <div class="image-container rounded-xl">
+            <img src='{{ item.image.url }}' alt='{{ item.name }}'>
+        </div>
+    </div>
+
+    <div class='col-span-2 p-6 bg-gray-100 rounded-xl'>
+        <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
+        <p class='text-gray-500'><strong>Price: </strong>{{ item.price}}</p>
+        <p class='text-gray-500'><strong>By: </strong>{{ item.created_by.username}}</p>
+
+        {% if item.description %}
+            <p class='text-gray-700'>
+                <strong class='text-gray-500'>Description:</strong><br>
+                {{ item.description}}
+            </p>
+        {% endif %}
+
+        {% comment %}Jeden z glupszych if-ow jakie mialem, wybacz za to. caly czas jednak mnie wyrzucalo probujac zmieniac{% endcomment %}
+        {% if user.is_authenticated and not item.is_rent %}
+            <a href="{% url 'item:rent_item' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-sky-500 text-white rounded-xl hover:bg-sky-700">Rent</a>
+        {% endif %}
+        {% if item.is_rent and user.is_authenticated %}
+            <p class='text-2xl'>This item is currently rented.</p>
+        {% endif %}
+        {% if not item.is_rent and not user.is_authenticated %}
+            <p class='text-2xl'>You need to sign in to order this item.</p>
+        {% endif %}
+        {% if item.is_rent and not user.is_authenticated %}
+            <p class='text-2xl'>This item is currently rented.</p>
+        {% endif %}
+
+
+        <p class='text-gray-700'>W krainie, gdzie czas jak mgła się snuje,
+            Sprzęt na 24 godziny w opiekę ci oddaje.
+            Klucz w ręku twej mocy, lecz pamiętaj,
+            Po 24h, wróci do nas swą drogą jak zawsze.
+            Zegar tyka cicho, w płaszczu nocy ukryty,
+            Opłata płynie jak strumień, nieuchronnie mierzona.
+            Choć wcześnie przyniesiesz z powrotem nasz dar,
+            Cena pozostanie, jak zaklęta w magii, niezmieniona...</p>
+        <a href='{% url "core:contact" %}' class = 'inline-block mt-6 px-6 py-3 text-lg font-semibold bg-sky-500 text-white rounded-xl hover:bg-sky-700'>Contact to rent</a>
+    </div>
+</div>
+
+<div class='mt-6 px-6 py-12 bg-gray-100 rounded-xl'>
+    <h2 class='mb-12 text-2xl text-center'>Related</h2>
+
+    <div class='grid grid-cols-3 gap-3'>
+        {% for item in related_items %}
+        <div>
+            <a href=" {% url 'item:detail' item.id %}">
+                <div>
+                    <img src='{{ item.image.url }}' class='item-image rounded-t-xl'>
+                </div>
+
+                <div class='p-6 bg-white rounded-b-xl'>
+                    <h2 class='text-2xl'>{{ item.name }}</h2>
+                    <p class='text-gray-500'>Price: {{ item.price }}</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

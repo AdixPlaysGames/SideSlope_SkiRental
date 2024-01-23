@@ -1,0 +1,145 @@
+/* styles.css */
+
+/* ------------------- Navbar */
+.navbar {
+    padding: 24px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.navbar a:first-child {
+    font-weight: 700;
+    font-size: 28px;
+    font-family: Arial, sans-serif;
+}
+
+.main-w {
+    color: #333;
+}
+
+.navbar a {
+    font-size: 24px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #888;
+}
+
+/* Button styles */
+.btn-signup,
+.btn-login {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    color: #fff;
+    font-family: Arial, sans-serif;
+
+}
+
+.btn-signup {
+    background-color: #445c84;
+}
+
+.btn-signup:hover {
+    background-color: #445c84;
+}
+
+.btn-login {
+    background-color: #555;
+}
+
+.btn-login:hover {
+    background-color: #333;
+}
+
+
+
+/* ----------------- footer */
+footer {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2d2d2d;
+    font-family: Arial, sans-serif;
+    max-width: 100%;
+    height: 200px;
+}
+
+footer div {
+    width: 60%;
+    padding-right: 2rem;
+}
+
+.footer-p {
+    color: #a1a1a1;
+}
+
+footer div,
+footer ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin: 1rem 0;
+}
+
+
+.w-menu {
+    margin-top: 1.5rem;
+}
+
+h3 {
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+    color: #a1a1a1;
+}
+
+
+.content {
+    padding: 24px 36px;
+}
+
+/* ------------------------------ITEM detail.html */
+.image-container {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ------------------------------CORE index.html */
+.item-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+/* -----------------------------zabawa finalna z about*/
+/* --- tailwind tez tu wymiata */

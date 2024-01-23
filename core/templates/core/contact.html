@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Contact {% endblock %}
+
+{% block content %}
+
+<div class = "w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+  <h1 class = 'mb-6 text-3xl'>Type a message</h1>
+
+  <main>
+      <section class="contact-form">
+          <form onsubmit="sendMessage(event)">
+            <div class='mb-3'>
+              <input type="text" name="name" placeholder="Your name" class = 'w-full py-4 px-6 rounded-xl'>
+            </div>
+            <div class='mb-3'>
+              <input type="email" name="email" placeholder="Your e-mail" class = 'w-full py-4 px-6 rounded-xl'>
+            </div>
+            <div class='mb-3'>
+              <input type="tel" name="phone" placeholder="Phone number" class = 'w-full py-4 px-6 rounded-xl'>
+            </div>
+            <div class='mb-3'>
+              <textarea name="message" placeholder="Message" class = 'w-full py-4 px-6 rounded-xl'></textarea>
+              <input type="submit" value="Send" class = 'w-full py-4 text-lg bg-sky-500 hover:bg-sky-700 rounded-xl text-white'>
+            </div>
+          </form>
+      </section>
+  </main>
+
+  <script>
+      function sendMessage(event) {
+          event.preventDefault();
+          const form = document.querySelector("form");
+          const name = form.querySelector("input[name='name']").value;
+          const email = form.querySelector("input[name='email']").value;
+          const phone = form.querySelector("input[name='phone']").value;
+          const message = form.querySelector("textarea[name='message']").value;
+
+          if (name === "" || email === "" || phone === "" || message === "") {
+              alert("All boxes required.");
+              return;
+          }
+
+          alert("Wiadomość została wysłana");
+          form.reset();
+      }
+  </script>
+</div>
+
+{% endblock %}

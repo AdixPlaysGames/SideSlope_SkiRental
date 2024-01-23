@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    {% load static %}
+    <a href="{% url 'core:pricing' %}?format=xml" class="download-xml-button" style="display: block; width: max-content; background-color: #007bff; color: white; padding: 10px 20px; text-align: center; border-radius: 5px; margin: 10px 0; text-decoration: none;">
+        Download XML Details
+    </a>
+    <div class='mt-6 px-6 py-12 bg-gray-100 rounded-xl' style="background-image: url('{% static 'images/items_background_index.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100%; height: 100%;">
+        <h2 class='mb-12 text-3xl text-center text-white bg-black bg-opacity-50 rounded-xl'>Items</h2>
+
+        <div class='grid grid-cols-3 gap-3'>
+            {% for item in items %}
+            <div>
+                <a href="{% url 'item:detail' item.id %}">
+                    <div>
+                        <img src='{{ item.image.url }}' class='item-image rounded-t-xl'>
+                    </div>
+
+                    <div class='p-6 bg-white rounded-b-xl'>
+                        <h2 class='text-2xl'>{{ item.name }}</h2>
+                        <p class='text-gray-500'>Price: {{ item.price }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

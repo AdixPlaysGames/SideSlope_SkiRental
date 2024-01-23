@@ -1,0 +1,57 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+{% spaceless %}
+    {% load static %}
+
+    {% if user.is_authenticated %}
+        <p class = 'mt-2 py-4 px-8 text-lg bg-sky-500 text-white rounded-xl'>Witamy ponownie, {{ user.username }}!</p>
+    {% endif %}
+
+    {% comment %}Alfabetycznie{% endcomment %}
+    {% regroup categories by first_letter as category_list %}
+
+    <div class='mt-6 px-6 py-12 bg-gray-100 rounded-xl' style="background-image: url('{% static 'images/categories_background_index.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100%; height: 100%;">
+        <h2 class='mb-12 text-3xl text-center text-white'>Categories</h2>
+
+        <div class='grid grid-cols-3 gap-3'>
+            {% for category in categories %}
+                <div>
+                    <a href="{% url 'item:items' %}">
+                        <div class='p-6 bg-white rounded-b-xl bg-opacity-50'>
+                            <img src='{{ category.image.url }}' class='item-image rounded-t-xl'>
+                            <h2 class='text-2xl'>{{ category.name }}</h2>
+                            <p class='text-black'>{{ category.items.count }} Items</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class='mt-6 px-6 py-12 bg-gray-100 rounded-xl' style="background-image: url('{% static 'images/items_background_index.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100%; height: 100%;">
+        <h2 class='mb-12 text-3xl text-center text-white bg-black bg-opacity-50 rounded-xl'>Items</h2>
+    
+        <div class='grid grid-cols-3 gap-3'>
+            {% for item in items %}
+            {% if forloop.counter <= 3 %}
+            <div>
+                <a href="{% url 'item:detail' item.id %}">
+                    <div>
+                        <img src='{{ item.image.url }}' class='item-image rounded-t-xl'>
+                    </div>
+    
+                    <div class='p-6 bg-white rounded-b-xl'>
+                        <h2 class='text-2xl'>{{ item.name }}</h2>
+                        <p class='text-gray-500'>Price: {{ item.price }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock %}

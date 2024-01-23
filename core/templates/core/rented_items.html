@@ -1,0 +1,36 @@
+{% extends "core/base.html" %}
+
+{% block title %}Rented Items{% endblock %}
+
+{% block content %}
+    <div class="pd-6 grid grid-cols-3 gap-6 bg-gray-100">
+
+        <div class="col-span-2">
+            {% if items %}
+                <div class="grid grid-cols-3 gap-6">
+                    {% for item in items %}
+                        <div>
+                            <a href="{% url 'item:detail' item.id %}">
+                                <div>
+                                    <img src="{{ item.image.url }}" class="item-image rounded-t-xl">
+                                </div>
+
+                                <div class="p-6 bg-white rounded-b-xl">
+                                    <h2 class="text-2xl">{{ item.name }}</h2>
+                                    <p class="text-gray-500">Time left: {{ item.time_left }}</p>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="item_id" value="{{ item.id }}">
+                                        <button type="submit" class="mt-2 py-4 px-8 bg-sky-500 text-lg rounded-xl text-white">Return</button>
+                                    </form>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-2xl font-semibold mt-6">No rented items</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
